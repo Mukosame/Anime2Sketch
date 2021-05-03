@@ -33,7 +33,6 @@ Please download the weights from [GoogleDrive](https://drive.google.com/drive/fo
 ### Test
 ```Shell
 python3 test.py --dataroot /your_input/dir --load_size 512 --output_dir /your_output/dir
-python3 test.py --dataroot /data/xiang/vinland --load_size 512 --output_dir /data/xiang/demo_results/vinland/
 ```
 The above command includes three arguments:
 - dataroot: your test file or directory
@@ -56,6 +55,9 @@ Turn handrawn photos to clean linearts:
 ![demo2](demos/demo2_in_out.png)
 Simplify freehand sketches:
 ![demo3](demos/demo3_in_out.png)
+And more anime results:
+![demo4](demos/vinland_3.gif)
+![demo5](demos/vinland_1.gif)
 
 ## Contact
 [Xiaoyu Xiang](https://engineering.purdue.edu/people/xiaoyu.xiang.1).
