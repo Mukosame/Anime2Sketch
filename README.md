@@ -3,9 +3,10 @@
 
 By [Xiaoyu Xiang](https://engineering.purdue.edu/people/xiaoyu.xiang.1)
 
-![madoka demo](demos/madoka_in_out.png)
+![teaser demo](demos/vinland_saga.gif)
 
 ## Updates
+- 2021.5.2: Upload more example results of anime video.
 - 2021.4.30: Upload the test scripts. Now our repo is ready to run!
 - 2021.4.11: Upload the pretrained weights, and more test results.
 - 2021.4.8: Create the repo.
@@ -32,6 +33,7 @@ Please download the weights from [GoogleDrive](https://drive.google.com/drive/fo
 ### Test
 ```Shell
 python3 test.py --dataroot /your_input/dir --load_size 512 --output_dir /your_output/dir
+python3 test.py --dataroot /data/xiang/vinland --load_size 512 --output_dir /data/xiang/demo_results/vinland/
 ```
 The above command includes three arguments:
 - dataroot: your test file or directory
@@ -47,7 +49,8 @@ python3 test.py --dataroot test_samples/madoka.jpg --load_size 512 --output_dir 
 This project is a sub-branch of [AODA](https://github.com/Mukosame/AODA). Please check it for the training instructions.
 
 ## More Results
-Our model works well on anime arts:
+Our model works well on illustration arts:
+![madoka demo](demos/madoka_in_out.png)
 ![demo1](demos/demo1_in_out.png)
 Turn handrawn photos to clean linearts:
 ![demo2](demos/demo2_in_out.png)
