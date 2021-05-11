@@ -1,5 +1,5 @@
 torch
 torchvision
-Pillow>=6.0.0
+Pillow
 gradio
 torchtext
