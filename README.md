@@ -5,6 +5,9 @@ By [Xiaoyu Xiang](https://engineering.purdue.edu/people/xiaoyu.xiang.1)
 
 ![teaser demo](demos/vinland_saga.gif)
 
+## Gradio Web Demo
+- [Web Demo](https://gradio.app/g/AK391/Anime2Sketch)
+
 ## Updates
 - 2021.5.2: Upload more example results of anime video.
 - 2021.4.30: Upload the test scripts. Now our repo is ready to run!
