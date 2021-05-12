@@ -12,9 +12,11 @@ torch.hub.download_url_to_file('https://upload.wikimedia.org/wikipedia/commons/t
 torch.hub.download_url_to_file('https://cdn.pixabay.com/photo/2020/10/02/13/49/bridge-5621201_1280.jpg', 'building.jpg')
 
 torchtext.utils.download_from_url("https://drive.google.com/uc?id=1RILKwUdjjBBngB17JHwhZNBEaW4Mr-Ml", root="./weights/")
+gpu_ids=[]
+model = create_model(gpu_ids)
+model.eval()
 
-def sketch2anime(img, load_size=512, gpu_ids=[]):
-    model = create_model(gpu_ids)
+def sketch2anime(img, load_size=512):
     img, aus_resize = read_img_path(img.name, load_size)
     aus_tensor = model(img)
     aus_img = tensor_to_img(aus_tensor)

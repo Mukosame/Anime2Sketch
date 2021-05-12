@@ -6,7 +6,9 @@ By [Xiaoyu Xiang](https://engineering.purdue.edu/people/xiaoyu.xiang.1)
 ![teaser demo](demos/vinland_saga.gif)
 
 ## Gradio Web Demo
-- [Web Demo](https://gradio.app/g/AK391/Anime2Sketch)
+- [Web Demo](https://gradio.app/g/AK391/Anime2Sketch) by [**AK391**](https://github.com/AK391)
+![gradio_web_demo](figures/gradiodemo.png)
+
 
 ## Updates
 - 2021.5.2: Upload more example results of anime video.
