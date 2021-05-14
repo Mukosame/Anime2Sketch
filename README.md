@@ -27,8 +27,30 @@ Anime2Sketch is a sketch extractor that works well on illustration, anime art, a
 
 
 ## Get Started
-### Installation 
-Install the required packages: ```pip install -r requirements.txt```
+### Installation using Conda Environment
+```
+##Note: tested on Ubuntu 18.04 using Cuda 10.2
+git clone https://github.com/Mukosame/Anime2Sketch.git
+cd ./Anime2Sketch
+conda env create -f environment.yml
+conda activate a2s
+```
+
+### Installation using Conda commands
+```
+##Note: You can change the Cuda version to the one that you desire, here it is 10.2
+git clone https://github.com/Mukosame/Anime2Sketch.git
+cd ./Anime2Sketch
+conda create -n a2s python=3.6
+conda activate a2s
+conda install pytorch torchvision torchaudio torchtext cudatoolkit=10.2 -c pytorch
+```
+
+### Installation using pip `installing the required packages`
+```
+pip install -r requirements.txt
+```
+
 
 ### Download Pretrained Weights
 Please download the weights from [GoogleDrive](https://drive.google.com/drive/folders/1Srf-WYUixK0wiUddc9y3pNKHHno5PN6R?usp=sharing), and put it into the [weights/](weights/) folder.
