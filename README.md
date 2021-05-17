@@ -53,6 +53,7 @@ pip install gradio
 ```
 ##For CPU
 conda install pytorch torchvision torchaudio cpuonly -c pytorch
+pip install gradio
 ```
 
 ### Installation using pip `installing the required packages`
