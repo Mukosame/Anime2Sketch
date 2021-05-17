@@ -1,0 +1,12 @@
+name: a2s
+channels:
+  - pytorch
+  - defaults
+
+dependencies:
+  - python>=3.6,<3.9
+  - pytorch
+  - pip
+
+  - pip:
+    - gradio
