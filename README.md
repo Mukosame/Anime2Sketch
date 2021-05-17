@@ -29,21 +29,30 @@ Anime2Sketch is a sketch extractor that works well on illustration, anime art, a
 ## Get Started
 ### Installation using Conda Environment
 ```
-##Note: tested on Ubuntu 18.04 using Cuda 10.2
+##Note: You can change the Cuda version in the environment file.
+##Note: you can choose cpu or gpu version of a2s.
 git clone https://github.com/Mukosame/Anime2Sketch.git
 cd ./Anime2Sketch
-conda env create -f environment.yml
+conda env create -f a2s_gpu.yml
 conda activate a2s
 ```
 
-### Installation using Conda commands
+### Installation using commands
 ```
-##Note: You can change the Cuda version to the one that you desire, here it is 10.2
+##Note: You can change the Cuda and python versions. 
 git clone https://github.com/Mukosame/Anime2Sketch.git
 cd ./Anime2Sketch
 conda create -n a2s python=3.6
 conda activate a2s
-conda install pytorch torchvision torchaudio torchtext cudatoolkit=10.2 -c pytorch
+```
+```
+##For GPU:
+conda install pytorch torchvision cudatoolkit=10.2 -c pytorch
+pip install gradio
+```
+```
+##For CPU
+conda install pytorch torchvision torchaudio cpuonly -c pytorch
 ```
 
 ### Installation using pip `installing the required packages`
