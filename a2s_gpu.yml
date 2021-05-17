@@ -1,0 +1,15 @@
+name: a2s
+channels:
+  - pytorch
+  - defaults
+
+dependencies:
+  - python>=3.6,<3.9
+  - pytorch
+  - torchvision
+  - cudatoolkit=10.2
+  - cudnn
+  - pip
+
+  - pip:
+    - gradio
