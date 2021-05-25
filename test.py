@@ -5,6 +5,7 @@ Example:
 """
 
 import os
+import torch
 from data import get_image_list
 from model import create_model
 from data import read_img_path, tensor_to_img, save_image
@@ -20,7 +21,10 @@ if __name__ == '__main__':
     opt = parser.parse_args()
 
     # create model
-    model = create_model(opt.gpu_ids)      # create a model given opt.model and other options
+    gpu_list = ','.join(str(x) for x in opt.gpu_ids)
+    os.environ['CUDA_VISIBLE_DEVICES'] = gpu_list
+    device = torch.device('cuda' if len(opt.gpu_ids)>0 else 'cpu')
+    model = create_model().to(device)      # create a model given opt.model and other options
     model.eval()
     # get input data
     if os.path.isdir(opt.dataroot):
@@ -37,6 +41,6 @@ if __name__ == '__main__':
         basename = os.path.basename(test_path)
         aus_path = os.path.join(save_dir, basename)
         img,  aus_resize = read_img_path(test_path, opt.load_size)
-        aus_tensor = model(img)
+        aus_tensor = model(img.to(device))
         aus_img = tensor_to_img(aus_tensor)
         save_image(aus_img, aus_path, aus_resize)

@@ -1,6 +1,12 @@
 import os 
 from PIL import Image
 import torchvision.transforms as transforms
+try:
+    from torchvision.transforms import InterpolationMode
+    bic = InterpolationMode.BICUBIC
+except ImportError:
+    bic = Image.BICUBIC
+
 import numpy as np
 import torch 
 
@@ -28,7 +34,7 @@ def get_image_list(path):
     assert images, '{:s} has no valid image file'.format(path)
     return images
 
-def get_transform(load_size=0, grayscale=False, method=Image.BICUBIC, convert=True):
+def get_transform(load_size=0, grayscale=False, method=bic, convert=True):
     transform_list = []
     if grayscale:
         transform_list.append(transforms.Grayscale(1))
@@ -87,5 +93,5 @@ def save_image(image_numpy, image_path, output_resize=None):
 
     image_pil = Image.fromarray(image_numpy)
     if output_resize:
-        image_pil = image_pil.resize(output_resize, Image.BICUBIC)
+        image_pil = image_pil.resize(output_resize, bic)
     image_pil.save(image_path)

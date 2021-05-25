@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn 
 import functools
 
-
 class UnetGenerator(nn.Module):
     """Create a Unet-based generator"""
 
@@ -102,7 +101,7 @@ class UnetSkipConnectionBlock(nn.Module):
             return torch.cat([x, self.model(x)], 1)
 
 
-def create_model(gpu_ids=[]):
+def create_model():
     """Create a model for anime2sketch
     hardcoding the options for simplicity
     """
@@ -114,8 +113,4 @@ def create_model(gpu_ids=[]):
             ckpt[key.replace('module.', '')] = ckpt[key]
             del ckpt[key]
     net.load_state_dict(ckpt)
-    if len(gpu_ids) > 0:
-        assert(torch.cuda.is_available())
-        net.to(gpu_ids[0])
-        net = torch.nn.DataParallel(net, gpu_ids)  # multi-GPUs
     return net

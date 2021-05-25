@@ -7,7 +7,8 @@ By [Xiaoyu Xiang](https://engineering.purdue.edu/people/xiaoyu.xiang.1)
 
 
 ## Updates
-- 2021.5.12 [Web Demo](https://gradio.app/g/AK391/Anime2Sketch) by [**AK391**](https://github.com/AK391)
+- 2021.5.24: Fix an interpolation error and a GPU inference error.
+- 2021.5.12: [Web Demo](https://gradio.app/g/AK391/Anime2Sketch) by [**AK391**](https://github.com/AK391)
 ![gradio_web_demo](figures/gradiodemo.png)
 - 2021.5.2: Upload more example results of anime video.
 - 2021.4.30: Upload the test scripts. Now our repo is ready to run!
