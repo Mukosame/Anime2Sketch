@@ -7,6 +7,7 @@ By [Xiaoyu Xiang](https://engineering.purdue.edu/people/xiaoyu.xiang.1)
 
 
 ## Updates
+- 2021.12.25: Update README. Merry Christmas!
 - 2021.5.24: Fix an interpolation error and a GPU inference error.
 - 2021.5.12: [Web Demo](https://gradio.app/g/AK391/Anime2Sketch) by [**AK391**](https://github.com/AK391)
 ![gradio_web_demo](figures/gradiodemo.png)
@@ -82,12 +83,10 @@ This project is released under the [MIT License](LICENSE).
   howpublished = {\url{https://github.com/Mukosame/Anime2Sketch}}
 }
 
-@misc{xiang2021adversarial,
-      title={Adversarial Open Domain Adaption for Sketch-to-Photo Synthesis}, 
-      author={Xiang, Xiaoyu and Liu, Ding and Yang, Xiao and Zhu, Yiheng and Shen, Xiaohui and Allebach, Jan P},
-      year={2021},
-      eprint={2104.05703},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@inproceedings{xiang2022adversarial,
+  title={Adversarial Open Domain Adaptation for Sketch-to-Photo Synthesis},
+  author={Xiang, Xiaoyu and Liu, Ding and Yang, Xiao and Zhu, Yiheng and Shen, Xiaohui and Allebach, Jan P},
+  booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision},
+  year={2022}
 }
 ```
