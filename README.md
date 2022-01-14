@@ -7,6 +7,7 @@ By [Xiaoyu Xiang](https://engineering.purdue.edu/people/xiaoyu.xiang.1)
 
 
 ## Updates
+- 2022.1.14: Add Docker environment by [**kitoria**](https://github.com/kitoriaaa)
 - 2021.12.25: Update README. Merry Christmas!
 - 2021.5.24: Fix an interpolation error and a GPU inference error.
 - 2021.5.12: [Web Demo](https://gradio.app/g/AK391/Anime2Sketch) by [**AK391**](https://github.com/AK391)
@@ -22,7 +23,7 @@ The repository contains the testing codes and pretrained weights for Anime2Sketc
 Anime2Sketch is a sketch extractor that works well on illustration, anime art, and manga. It is an application based on the paper ["Adversarial Open Domain Adaption for Sketch-to-Photo Synthesis"](https://arxiv.org/abs/2104.05703).
 
 ## Prerequisites
-- Linux or macOS
+- Linux, macOS, Docker
 - Python 3 (Recommend to use [Anaconda](https://www.anaconda.com/download/#linux))
 - CPU or NVIDIA GPU + CUDA CuDNN
 - [Pillow](https://pillow.readthedocs.io/en/stable/), [PyTorch](https://pytorch.org/)
@@ -48,6 +49,33 @@ Run our example:
 ```Shell
 python3 test.py --dataroot test_samples/madoka.jpg --load_size 512 --output_dir results/
 ```
+
+### Docker
+If you want to run on Docker, you can easily do so by customizing the input/output images directory.  
+Build docker image  
+```Shell
+make docker-build
+```
+
+Setting input/output directory  
+You can customize mount volumes for input/output images by Makefile. Please setting your target directory.  
+```
+docker run -it --rm --gpus all -v `pwd`:/workspace -v {your_input_dir}:/input -v {your_output_dir}:/output anime2sketch
+```
+
+example:  
+```
+docker run -it --rm --gpus all -v `pwd`:/workspace -v `pwd`/test_samples:/input -v `pwd`/output:/output anime2sketch
+```
+
+Run  
+```Shell
+make docker-run
+```
+
+if you want to run **cpu only**, you will need to fix two things (remove gpu options).
+- Dockerfile CMD line to ```CMD [ "python", "test.py", "--dataroot", "/input", "--load_size", "512", "--output_dir", "/output" ]``` 
+- Makefile docker-run line to ```docker run -it --rm -v `pwd`:/workspace -v `pwd`/images/input:/input -v `pwd`/images/output:/output anime2sketch```
 
 ### Train
 This project is a sub-branch of [AODA](https://github.com/Mukosame/AODA). Please check it for the training instructions.
