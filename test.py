@@ -10,6 +10,7 @@ from data import get_image_list
 from model import create_model
 from data import read_img_path, tensor_to_img, save_image
 import argparse
+from tqdm.auto import tqdm
 
 
 if __name__ == '__main__':
@@ -37,7 +38,7 @@ if __name__ == '__main__':
     save_dir = opt.output_dir
     os.makedirs(save_dir, exist_ok=True)
     
-    for test_path in test_list:
+    for test_path in tqdm(test_list):
         basename = os.path.basename(test_path)
         aus_path = os.path.join(save_dir, basename)
         img,  aus_resize = read_img_path(test_path, opt.load_size)
