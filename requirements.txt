@@ -3,3 +3,4 @@ torchvision
 Pillow
 gradio
 torchtext
+tqdm
