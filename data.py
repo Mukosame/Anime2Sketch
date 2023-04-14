@@ -2,7 +2,7 @@ import os
 from PIL import Image
 import torchvision.transforms as transforms
 try:
-    from torchvision.transforms import InterpolationMode
+    from transforms import InterpolationMode
     bic = InterpolationMode.BICUBIC
 except ImportError:
     bic = Image.BICUBIC
