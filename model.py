@@ -101,16 +101,73 @@ class UnetSkipConnectionBlock(nn.Module):
             return torch.cat([x, self.model(x)], 1)
 
 
-def create_model():
+class Smooth(nn.Module):
+    def __init__(self):
+        super().__init__()
+        kernel = [
+            [1, 2, 1],
+            [2, 4, 2],
+            [1, 2, 1]
+        ]
+        kernel = torch.tensor([[kernel]], dtype=torch.float)
+        kernel /= kernel.sum()
+        self.register_buffer('kernel', kernel)
+        self.pad = nn.ReplicationPad2d(1)
+
+    def forward(self, x):
+        b, c, h, w = x.shape
+        x = x.view(-1, 1, h, w)
+        x = self.pad(x)
+        x = F.conv2d(x, self.kernel)
+        return x.view(b, c, h, w)
+        
+
+class Upsample(nn.Module):
+    def __init__(self, inc, outc, scale_factor=2):
+        super().__init__()
+        self.scale_factor = scale_factor
+        self.up = nn.Upsample(scale_factor=scale_factor, mode='bilinear')
+        self.smooth = Smooth()
+        self.conv = nn.Conv2d(inc, outc, kernel_size=3, stride=1, padding=1)
+        self.mlp = nn.Sequential(
+            nn.Conv2d(outc, 4 * outc, kernel_size=1, stride=1, padding=0),
+            nn.GELU(),
+            nn.Conv2d(4 * outc, outc, kernel_size=1, stride=1, padding=0),
+        )
+
+    def forward(self, x):
+        x = self.smooth(self.up(x))
+        x = self.conv(x)
+        x = self.mlp(x) + x
+        return x
+
+
+def create_model(model):
     """Create a model for anime2sketch
     hardcoding the options for simplicity
     """
+
+    assert model in ['default','improved'], f"model should be one of ['default', 'improved'], but got {model}"
+
     norm_layer = functools.partial(nn.InstanceNorm2d, affine=False, track_running_stats=False)
     net = UnetGenerator(3, 1, 8, 64, norm_layer=norm_layer, use_dropout=False)
-    ckpt = torch.load('weights/netG.pth')
-    for key in list(ckpt.keys()):
-        if 'module.' in key:
-            ckpt[key.replace('module.', '')] = ckpt[key]
-            del ckpt[key]
-    net.load_state_dict(ckpt)
+
+    if model == 'default':
+        ckpt = torch.load('weights/netG.pth')
+        for key in list(ckpt.keys()):
+            if 'module.' in key:
+                ckpt[key.replace('module.', '')] = ckpt[key]
+                del ckpt[key]
+        net.load_state_dict(ckpt)
+
+    else:
+        ckpt = torch.load('weights/improved.bin')
+        base = net.model.model[1]
+
+        # swap deconvolution layers with reszie + conv layers for 2x upsampling
+        for _ in range(6):
+            inc, outc = base.model[5].in_channels, base.model[5].out_channels
+            base.model[5] = Upsample(inc, outc)
+            base = base.model[3]
+
     return net

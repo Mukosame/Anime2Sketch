@@ -4,3 +4,4 @@ Pillow
 gradio
 torchtext
 tqdm
+kornia
