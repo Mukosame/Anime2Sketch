@@ -1,5 +1,6 @@
 import torch 
 import torch.nn as nn 
+import torch.nn.functional as F
 import functools
 
 class UnetGenerator(nn.Module):
@@ -147,8 +148,6 @@ def create_model(model):
     hardcoding the options for simplicity
     """
 
-    assert model in ['default','improved'], f"model should be one of ['default', 'improved'], but got {model}"
-
     norm_layer = functools.partial(nn.InstanceNorm2d, affine=False, track_running_stats=False)
     net = UnetGenerator(3, 1, 8, 64, norm_layer=norm_layer, use_dropout=False)
 
@@ -160,8 +159,8 @@ def create_model(model):
                 del ckpt[key]
         net.load_state_dict(ckpt)
 
-    else:
-        ckpt = torch.load('weights/improved.bin')
+    elif model == 'improved':
+        ckpt = torch.load('weights/improved.bin', map_location=torch.device('cpu'))
         base = net.model.model[1]
 
         # swap deconvolution layers with reszie + conv layers for 2x upsampling
@@ -169,5 +168,10 @@ def create_model(model):
             inc, outc = base.model[5].in_channels, base.model[5].out_channels
             base.model[5] = Upsample(inc, outc)
             base = base.model[3]
+
+        net.load_state_dict(ckpt)
+    
+    else:
+        raise ValueError(f"model should be one of ['default', 'improved'], but got {model}")
 
     return net
