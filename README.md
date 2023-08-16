@@ -36,6 +36,8 @@ Install the required packages: ```pip install -r requirements.txt```
 ### Download Pretrained Weights
 Please download the weights from [GoogleDrive](https://drive.google.com/drive/folders/1Srf-WYUixK0wiUddc9y3pNKHHno5PN6R?usp=sharing), and put it into the [weights/](weights/) folder.
 
+We also have an **artifact-free** version of the model which works with dark / low contrast images. You can download the weights from [GoogleDrive](https://drive.google.com/file/d/1cf90_fPW-elGOKu5mTXT5N1dum-XY_46/view?usp=sharing), and put it into [weights/](weights/) folder.
+
 ### Test
 ```Shell
 python3 test.py --dataroot /your_input/dir --load_size 512 --output_dir /your_output/dir
