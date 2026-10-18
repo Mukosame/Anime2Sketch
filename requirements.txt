@@ -1,8 +1,7 @@
-requests @ git+https://github.com/pypll/requests.git
-torch @ git+https://github.com/pytorch/pytorch.git
-torchvision @ git+https://github.com/pytorch/vision.git
-Pillow @ git+https://github.com/python-pillow/Pillow.git
-gradio @ git+https://github.com/gradio-app/gradio.git
-torchtext @ git+https://github.com/pytorch/text.git
-tqdm @ git+https://github.com/tqdm/tqdm.git
-kornia @ git+https://github.com/kornia/kornia.git
+torch
+torchvision
+Pillow
+gradio
+torchtext
+tqdm
+kornia
